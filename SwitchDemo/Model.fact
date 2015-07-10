@@ -1,0 +1,44 @@
+namespace SwitchDemo;
+
+fact Company {
+key:
+    string identifier;
+
+query:
+    VideoSwitch* videoSwitches {
+        VideoSwitch s : s.company = this
+    }
+}
+
+fact VideoSwitch {
+key:
+    unique;
+    publish Company company;
+
+mutable:
+    RequestRoute selection;
+
+query:
+    RequestRoute* requests {
+        RequestRoute r : r.videoSwitch = this
+            where r.isCurrent
+    }
+}
+
+fact RequestRoute {
+key:
+    publish VideoSwitch videoSwitch;
+    int fromChannel;
+    int toChannel;
+    RequestRoute *prior;
+
+query:
+    bool isCurrent {
+        not exists RequestRoute next : next.prior = this
+    }
+
+    RequestRoute* following {
+        RequestRoute r : r.prior = this
+            where r.isCurrent
+    }
+}

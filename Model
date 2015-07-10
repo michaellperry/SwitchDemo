@@ -1,0 +1,10 @@
+digraph "SwitchDemo"
+{
+    rankdir=BT
+    VideoSwitch -> Company [color="red"]
+    VideoSwitch__selection -> VideoSwitch
+    VideoSwitch__selection -> VideoSwitch__selection [label="  *"]
+    VideoSwitch__selection -> RequestRoute
+    RequestRoute -> VideoSwitch [color="red"]
+    RequestRoute -> RequestRoute [label="  *"]
+}
