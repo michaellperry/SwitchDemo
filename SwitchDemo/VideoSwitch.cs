@@ -8,6 +8,12 @@ namespace SwitchDemo
 {
     public partial class VideoSwitch
     {
+        public async Task MakeRouteRequest(int fromChannel, int toChannel)
+        {
+            await Community.AddFactAsync(new RequestRoute(
+                this, Selection.Candidates, fromChannel, toChannel));
+        }
+
         public RequestRoute NextRequest
         {
             get

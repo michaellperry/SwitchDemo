@@ -53,8 +53,7 @@ namespace SwitchDemo
             await SynchronizeAsync();
             var clientSwitch = _clientCompany.VideoSwitches.Single();
 
-            await _client.AddFactAsync(new RequestRoute(
-                clientSwitch, Enumerable.Empty<RequestRoute>(), 4, 8));
+            await clientSwitch.MakeRouteRequest(4, 8);
 
             await SynchronizeAsync();
 
@@ -69,8 +68,7 @@ namespace SwitchDemo
             await CreateCompanyAsync();
             await SynchronizeAsync();
             var clientSwitch = _clientCompany.VideoSwitches.Single();
-            await _client.AddFactAsync(new RequestRoute(
-                clientSwitch, Enumerable.Empty<RequestRoute>(), 4, 8));
+            await clientSwitch.MakeRouteRequest(4, 8);
             await SynchronizeAsync();
 
             _serverSwitch.Selection = _serverSwitch.NextRequest;
